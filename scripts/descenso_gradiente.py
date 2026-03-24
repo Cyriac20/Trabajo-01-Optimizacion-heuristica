@@ -3,6 +3,9 @@ import sympy as sym
 import matplotlib
 matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
+import os
+
+os.makedirs('../resultados', exist_ok=True)
 
 iteraciones_max = 100000
 tasa_de_aprendizaje = 0.0002
@@ -70,7 +73,7 @@ def optimization_2D(x_val, y_val, funcion , derivada_x , derivada_y, print_indic
         ax1.scatter(nb, valores[:,0])
         ax2.scatter(nb, valores[:,1])
 
-        plt.savefig("graphique.png")
+        plt.savefig("../resultados/convergencia_descenso_gradiente.png")
         plt.close()
     
     return np.array([valores[-1][0], valores[-1][1]])
@@ -161,7 +164,7 @@ def optimization_3D(x_val, y_val, z_val, funcion , derivada_x , derivada_y, deri
         ax2.scatter(nb, valores[:,1])
         ax3.scatter(nb, valores[:,2])
 
-        plt.savefig("graphique.png")
+        plt.savefig("../resultados/convergencia_descenso_gradiente.png")
         plt.close()
     
     return [valores[-1][0], valores[-1][1], valores[-1][2]]

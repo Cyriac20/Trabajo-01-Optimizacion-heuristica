@@ -16,6 +16,9 @@ import matplotlib
 matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import os
+
+os.makedirs('../resultados', exist_ok=True)
 
 
 ciudades = np.array([
@@ -116,14 +119,14 @@ ciudades_plano[:,0] = ciudades[:,1] * 6371
 ciudades_plano[:,1] = np.log( np.tan( (np.pi/4) + ciudades[:,0]/2 )) * 6371
 
 
-img = mpimg.imread('mexico.jpg')
+img = mpimg.imread('../data/mexico.jpg')
 
 fig, ax = plt.subplots()
 ax.imshow(img, extent=[np.min(ciudades_plano[:,0])-300, np.max(ciudades_plano[:,0])+100, np.min(ciudades_plano[:,1])-400, np.max(ciudades_plano[:,1])+200], aspect='auto')
 
 ax.scatter(ciudades_plano[:,0], ciudades_plano[:,1])
 ax.plot(ciudades_plano[optimizer.best_path,0],ciudades_plano[optimizer.best_path,1],'-r')
-plt.savefig("graphique.png")
+plt.savefig("../resultados/ruta_vendedor_mexicano.png")
 plt.close()
 
 
