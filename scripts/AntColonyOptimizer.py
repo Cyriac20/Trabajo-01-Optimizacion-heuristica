@@ -39,6 +39,7 @@ class AntColonyOptimizer:
 
         # Internal stats
         self.best_series = []
+        self.best_path_series = []   # mejor ruta por iteración (para GIF)
         self.best = None
         self.fitted = False
         self.best_path = None
@@ -203,6 +204,7 @@ class AntColonyOptimizer:
 
             if i == 0:
                 best_score_so_far = best_score
+                self.best_path = best_path
             else:
                 if mode == 'min':
                     if best_score < best_score_so_far:
@@ -219,6 +221,7 @@ class AntColonyOptimizer:
                 num_equal = 0
 
             self.best_series.append(best_score)
+            self.best_path_series.append(list(self.best_path))  # ruta global mejor hasta iter i
             self._evaporation()
             self._intensify(best_path_coords)
             self._update_probabilities()
