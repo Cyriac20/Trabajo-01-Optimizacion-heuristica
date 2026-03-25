@@ -45,7 +45,7 @@ Schwefel_2D = sym.lambdify((x,y),S_2D, 'numpy')
 
 ### optimization
 
-def optimization_2D(x_val, y_val, funcion , derivada_x , derivada_y, print_indice = False ):
+def optimization_2D(x_val, y_val, funcion , derivada_x , derivada_y, print_indice = True ):
     
     valores = np.zeros(shape=(iteraciones_max,3))
 
@@ -67,10 +67,17 @@ def optimization_2D(x_val, y_val, funcion , derivada_x , derivada_y, print_indic
 
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 
-        ax1.scatter(nb, valores[:,0])
-        ax2.scatter(nb, valores[:,1])
+        ax1.scatter(nb, valores[:,0], label = "convergencia de x")
+        ax1.set_xlabel("Numero iteraciones")
+        ax1.set_ylabel("Valor de x")
+        ax1.legend()
 
-        plt.savefig("graphique.png")
+        ax2.scatter(nb, valores[:,1], label = "convergencia de y")
+        ax2.set_xlabel("Numero iteraciones")
+        ax2.set_ylabel("Valor de y")
+        ax2.legend()
+
+        plt.savefig("descenso_gradiente.png")
         plt.close()
     
     return np.array([valores[-1][0], valores[-1][1]])
@@ -81,14 +88,14 @@ def different_values_2D(funcion , derivada_x , derivada_y):
         x_val = np.random.uniform(-5, 5)
         y_val = np.random.uniform(-5, 5)
 
-        results.append(optimization_2D(x_val,y_val , funcion , derivada_x , derivada_y))
+        results.append(optimization_2D(x_val,y_val , funcion , derivada_x , derivada_y, False))
         results[j].append(x_val)
         results[j].append(y_val)
 
     return np.array(results)
 
 
-#print(optimization_2D(20,10,Schwefel_2D, derivada_schwefel_2D_x, derivada_schwefel_2D_y))
+optimization_2D(20,10,Schwefel_2D, derivada_schwefel_2D_x, derivada_schwefel_2D_y)
 
 # %% 3D
 
@@ -133,7 +140,7 @@ Schwefel_3D = sym.lambdify((x,y,z),S_3D, 'numpy')
 
 ### optimization
 
-def optimization_3D(x_val, y_val, z_val, funcion , derivada_x , derivada_y, derivada_z, print_indice = False ):
+def optimization_3D(x_val, y_val, z_val, funcion , derivada_x , derivada_y, derivada_z, print_indice = True ):
     
     valores = np.zeros(shape=(iteraciones_max,4))
 
@@ -157,11 +164,22 @@ def optimization_3D(x_val, y_val, z_val, funcion , derivada_x , derivada_y, deri
 
         fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12, 5))
 
-        ax1.scatter(nb, valores[:,0])
-        ax2.scatter(nb, valores[:,1])
-        ax3.scatter(nb, valores[:,2])
+        ax1.scatter(nb, valores[:,0], label = "convergencia de x")
+        ax1.set_xlabel("Numero iteraciones")
+        ax1.set_ylabel("Valor de x")
+        ax1.legend()
 
-        plt.savefig("graphique.png")
+        ax2.scatter(nb, valores[:,1], label = "convergencia de y")
+        ax2.set_xlabel("Numero iteraciones")
+        ax2.set_ylabel("Valor de y")
+        ax2.legend()
+
+        ax3.scatter(nb, valores[:,2], label = "convergencia de z")
+        ax3.set_xlabel("Numero iteraciones")
+        ax3.set_ylabel("Valor de z")
+        ax3.legend()
+
+        plt.savefig("descenso_gradiente.png")
         plt.close()
     
     return [valores[-1][0], valores[-1][1], valores[-1][2]]
@@ -173,13 +191,11 @@ def different_values_3D(funcion , derivada_x , derivada_y, derivada_z ):
         y_val = np.random.uniform(1, 10)
         z_val = np.random.uniform(1, 10)
 
-        results.append(optimization_3D(x_val ,y_val, z_val,funcion , derivada_x , derivada_y, derivada_z  ))
+        results.append(optimization_3D(x_val ,y_val, z_val,funcion , derivada_x , derivada_y, derivada_z, False  ))
         results[j].append(x_val)
         results[j].append(y_val)
         results[j].append(z_val)
 
     return np.array(results)
 
-#print(different_values_3D(Rosenbrock_3D, derivada_rosenbrock_3D_x, derivada_rosenbrock_3D_y, derivada_rosenbrock_3D_z))
 
-print(different_values_3D(Schwefel_3D, derivada_schwefel_3D_x, derivada_schwefel_3D_y, derivada_schwefel_3D_z))
