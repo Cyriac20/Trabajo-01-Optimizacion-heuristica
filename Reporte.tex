@@ -1,0 +1,133 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{xcolor}
+
+\geometry{margin=2.5cm}
+
+\definecolor{primary}{RGB}{26, 115, 232}
+
+\title{\textbf{\textcolor{primary}{Reporte Técnico: Optimización Heurística y Bioinspirada}} \\ \large De Funciones Continuas al Problema del Vendedor Viajero Mexicano}
+\author{Cyriac SALIGNAT \and Juan José Zapata Moreno}
+\date{Marzo 2026}
+
+\begin{document}
+
+\maketitle
+
+\hrule
+\vspace{1em}
+\begin{abstract}
+Este informe presenta el desarrollo y análisis de diversos métodos de optimización aplicados a problemas continuos y combinatorios. Se evalúa el desempeño del descenso por gradiente frente a heurísticas como Cúmulos de Partículas (PSO), Evolución Diferencial (DE) y Colonias de Hormigas (ACO), analizando tanto la calidad de la solución como la eficiencia computacional en términos de evaluaciones de la función objetivo.
+\end{abstract}
+\vspace{1em}
+\hrule
+
+\section{Parte 1: Optimización Numérica}
+
+Se seleccionaron dos funciones de prueba con características críticas para la optimización global: la función de Rosenbrock (valle estrecho) y la función de Schwefel (múltiples mínimos locales).
+
+\subsection{Definiciones Matemáticas}
+
+La función de \textbf{Rosenbrock} se define como:
+\begin{equation}
+f(\mathbf{x}) = \sum_{i=1}^{d-1} \left[ 100(x_{i+1} - x_i^2)^2 + (1 - x_i)^2 \right]
+\end{equation}
+donde el óptimo global es $f(1, \dots, 1) = 0$.
+
+La función de \textbf{Schwefel} se define como:
+\begin{equation}
+f(\mathbf{x}) = 418.9829 d - \sum_{i=1}^d x_i \sin(\sqrt{|x_i|})
+\end{equation}
+cuyo óptimo global se encuentra en $x_i \approx 420.9687$ con $f(\mathbf{x}) \approx 0$.
+
+\subsection{Resultados y Discusión}
+
+En la Tabla \ref{tab:res_num} se resumen los resultados obtenidos en 2 y 3 dimensiones. Para las heurísticas, se reporta el mejor valor tras un número fijo de evaluaciones.
+
+\begin{table}[H]
+\centering
+\caption{Desempeño de los algoritmos de optimización numérica.}
+\label{tab:res_num}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Función} & \textbf{Dim} & \textbf{Método} & \textbf{Mejor Valor ($f_{min}$)} & \textbf{Evaluaciones} \\
+\midrule
+Rosenbrock & 2D & Gradiente & $< 10^{-6}$ & $\sim$15,000 \\
+           & 2D & PSO / DE  & 0.00 & 15,000 / 6,500 \\
+\midrule
+Schwefel   & 2D & Gradiente & 258.12 (Atrapado) & $\sim$10,000 \\
+           & 2D & PSO / DE  & 0.00 & 15,000 / 8,000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Discusión:}
+El descenso por gradiente aporta una precisión local excelente pero es ciego ante la estructura global en Schwefel, quedando atrapado prematuramente. Los métodos heurísticos aportan robustez global, logrando evadir pozos locales mediante la exploración poblacional.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{resultados/superficies_2D.png}
+    \caption{Paisajes de Rosenbrock y Schwefel en 2D.}
+    \label{fig:surf}
+\end{figure}
+
+\section{Parte 2: Optimización Combinatoria (TSP México)}
+
+El objetivo es minimizar el costo de un recorrido por las 32 capitales de México.
+
+\subsection{Modelización del Costo}
+El costo total se calculó considerando un Nissan Versa:
+\begin{itemize}
+    \item \textbf{Combustible:} $\$1.82$ MXN/km (Consumo 7L/100km).
+    \item \textbf{Peajes:} $\$4.00$ MXN/km (Estimación por tramo).
+    \item \textbf{Vendedor:} $\$0.42$ MXN/km (Salario prorrateado por jornada de 800km).
+    \item \textbf{Costo Total:} $\approx \$6.24$ MXN por kilómetro.
+\end{itemize}
+
+\subsection{Convergencia y Resultados}
+Se compararon Colonias de Hormigas (ACO) y Algoritmos Genéticos (GA).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resultados/convergencia_ag_vs_aco.png}
+    \caption{Curva de convergencia comparativa ACO vs AG.}
+    \label{fig:conv_tsp}
+\end{figure}
+
+La ruta final obtenida por el Algoritmo Genético muestra una distribución eficiente del recorrido nacional (ver Figura \ref{fig:mapa}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resultados/ruta_ag_mexico.png}
+    \caption{Mejor ruta encontrada para el TSP México.}
+    \label{fig:mapa}
+\end{figure}
+
+\section{Contribuciones y Metodología}
+
+El conjunto de los trabajos presentados en este informe ha sido realizado íntegramente por \textbf{Cyriac SALIGNAT} y \textbf{Juan José Zapata Moreno}. La distribución de las contribuciones es la siguiente:
+
+\begin{itemize}
+    \item \textbf{Juan Jose Zapata Moreno:} Realizó las preguntas 3 y 4 de la parte 1, así como la sección relativa al algoritmo evolutivo y la generación de animaciones (GIFs) de la parte 2.
+    \item \textbf{Cyriac SALIGNAT:} Se encargó de las preguntas 1 y 2 de la parte 1, de la modelización del problema en la parte 2, así como de la implementación del enfoque de colonias de hormigas.
+\end{itemize}
+
+\textbf{Uso de IA:} Se recurrió ocasionalmente a herramientas de inteligencia artificial, principalmente con el fin de recordar la sintaxis adecuada y de obtener ideas generales sobre cómo estructurar el código, sin sustituir el trabajo de desarrollo propio.
+
+\textbf{Enlace a GitHub:} \url{https://github.com/Cyriac20/Trabajo-01-Optimizacion-heuristica}
+
+\begin{thebibliography}{9}
+\bibitem{storn} Storn, R., \& Price, K. (1997). Differential evolution. \textit{J. Glob. Optim.}
+\bibitem{goldberg} Goldberg, D. E. (1989). \textit{Genetic Algorithms}.
+\bibitem{dorigo} Dorigo, M., \& Gambardella, L. M. (1997). Ant colony system. \textit{IEEE Trans. Evol. Comput.}
+\end{thebibliography}
+
+\end{document}
