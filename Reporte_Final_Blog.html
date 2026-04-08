@@ -191,13 +191,14 @@
 </ul>
 <hr />
 <h2>4. Experimentación y Resultados: Numérica Continua</h2>
-<h3>4.1 Evaluación Clásica (2D y 3D)</h3>
-<p>Sometimos el GD, AE, PSO y DE a pruebas rigurosas. La <strong>Tabla 1</strong> resume el rendimiento obtenido en los escenarios bidimensionales clásicos. </p>
-<p><strong>Tabla 1:</strong> <em>Métricas de rendimiento de algoritmos en funciones de prueba 2D.</em></p>
+<h3>4.1 Evaluación Comparativa (2D y 3D)</h3>
+<p>Para garantizar la rigurosidad técnica, sometimos a los algoritmos de Descenso por Gradiente (GD), Algoritmos Evolutivos (AE), Optimización por Enjambre de Partículas (PSO) y Evolución Diferencial (DE) a pruebas exhaustivas en 2 y 3 dimensiones. La <strong>Tabla 1</strong> presenta los resultados consolidados de estas ejecuciones experimentales.</p>
+<p><strong>Tabla 1:</strong> <em>Métricas de rendimiento comparativo en funciones de Rosenbrock y Schwefel (2D y 3D).</em></p>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;">Función</th>
+<th style="text-align: left;">Dim</th>
 <th style="text-align: left;">Método</th>
 <th style="text-align: left;">Mejor Valor ($f_{min}$)</th>
 <th style="text-align: left;">Evaluaciones</th>
@@ -206,101 +207,218 @@
 <tbody>
 <tr>
 <td style="text-align: left;"><strong>Rosenbrock</strong></td>
-<td style="text-align: left;">Gradiente</td>
-<td style="text-align: left;">$&lt; 10^{-6}$</td>
-<td style="text-align: left;">~15,000</td>
+<td style="text-align: left;">2D</td>
+<td style="text-align: left;">Gradiente (GD)</td>
+<td style="text-align: left;">1.04e-01</td>
+<td style="text-align: left;">25,000</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">PSO</td>
-<td style="text-align: left;">0.00</td>
-<td style="text-align: left;">15,000</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Evolutivo (AE)</td>
+<td style="text-align: left;">7.03e-03</td>
+<td style="text-align: left;">18,060</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">DE</td>
-<td style="text-align: left;">0.00</td>
-<td style="text-align: left;">~6,500</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Enjambre (PSO)</td>
+<td style="text-align: left;">4.95e-16</td>
+<td style="text-align: left;">15,050</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Diferencial (DE)</td>
+<td style="text-align: left;">0.00e+00</td>
+<td style="text-align: left;">3,963</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3D</td>
+<td style="text-align: left;">Gradiente (GD)</td>
+<td style="text-align: left;">5.45e-02</td>
+<td style="text-align: left;">35,000</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Evolutivo (AE)</td>
+<td style="text-align: left;">3.05e-01</td>
+<td style="text-align: left;">18,060</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Enjambre (PSO)</td>
+<td style="text-align: left;">2.81e-03</td>
+<td style="text-align: left;">15,050</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Diferencial (DE)</td>
+<td style="text-align: left;">0.00e+00</td>
+<td style="text-align: left;">11,974</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Schwefel</strong></td>
-<td style="text-align: left;">Gradiente</td>
-<td style="text-align: left;">258.12 (Atrapado)</td>
-<td style="text-align: left;">~10,000</td>
+<td style="text-align: left;">2D</td>
+<td style="text-align: left;">Gradiente (GD)</td>
+<td style="text-align: left;">2.54e-05</td>
+<td style="text-align: left;">415</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">PSO</td>
-<td style="text-align: left;">0.00</td>
-<td style="text-align: left;">15,000</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Evolutivo (AE)</td>
+<td style="text-align: left;">1.82e-02</td>
+<td style="text-align: left;">18,060</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">DE</td>
-<td style="text-align: left;">0.00</td>
-<td style="text-align: left;">~8,000</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Enjambre (PSO)</td>
+<td style="text-align: left;">2.54e-05</td>
+<td style="text-align: left;">15,050</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Diferencial (DE)</td>
+<td style="text-align: left;">2.54e-05</td>
+<td style="text-align: left;">1,473</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3D</td>
+<td style="text-align: left;">Gradiente (GD)</td>
+<td style="text-align: left;">9.08e+02 (Atrapado)</td>
+<td style="text-align: left;">21,000</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Evolutivo (AE)</td>
+<td style="text-align: left;">1.65e-02</td>
+<td style="text-align: left;">18,060</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Enjambre (PSO)</td>
+<td style="text-align: left;">2.36e+02 (Atrapado)</td>
+<td style="text-align: left;">15,050</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Diferencial (DE)</td>
+<td style="text-align: left;">3.81e-05</td>
+<td style="text-align: left;">3,244</td>
 </tr>
 </tbody>
 </table>
-<p>Como se ilustra en la <strong>Tabla 1</strong>, el Descenso por Gradiente es extremadamente rápido y preciso cuando las condiciones son convexas o lisas (Rosenbrock). Sin embargo, al enfrentar Schwefel, queda completamente engañado por el primer mínimo local.</p>
-<h3>4.2 Visualización Espacial</h3>
-<p>El comportamiento de estos agentes puede observarse vívidamente cuando proyectamos los datos en 3D. A continuación, el carrusel de imágenes muestra el abismo de comportamiento entre utilizar derivadas y utilizar inteligencia de enjambre:</p>
+<p>Como se evidencia en la <strong>Tabla 1</strong>, el rendimiento varía drásticamente según la topología y la dimensionalidad. A continuación, desglosamos el comportamiento observado:</p>
+<h4>4.1.1 Análisis del Escalado Dimensional</h4>
+<ol>
+<li>
+<p><strong>Descenso por Gradiente (GD):</strong></p>
+<ul>
+<li><strong>2D:</strong> Es extremadamente eficiente en Rosenbrock si el punto inicial es favorable, logrando una sintonía fina rápida.</li>
+<li><strong>Transición a 3D:</strong> El costo computacional (evaluaciones) aumenta significativamente para mantener la precisión. En Schwefel 3D, el GD muestra su mayor debilidad: la incapacidad total de escapar de mínimos locales, quedando atrapado en valores de función muy altos ($f \approx 908$).</li>
+</ul>
+</li>
+<li>
+<p><strong>Algoritmo Evolutivo (AE):</strong></p>
+<ul>
+<li><strong>2D:</strong> Ofrece una exploración sólida, aunque a veces con una convergencia más lenta hacia el valor exacto 0 en comparación con DE.</li>
+<li><strong>Transición a 3D:</strong> Demuestra una robustez notable. En Schwefel 3D, superó al PSO en esta instancia particular, encontrando una región muy cercana al óptimo global ($f \approx 0.016$), lo que confirma que su mecanismo de mutación mantiene la diversidad necesaria en espacios de mayor dimensión.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimización por Enjambre de Partículas (PSO):</strong></p>
+<ul>
+<li><strong>2D:</strong> Excelente velocidad de convergencia. "Caza" el óptimo de Rosenbrock casi instantáneamente.</li>
+<li><strong>Transición a 3D:</strong> Aunque sigue siendo superior al gradiente, el PSO puede sufrir de convergencia prematura si el enjambre colapsa demasiado rápido en un mínimo local fuerte, como se observó en Schwefel 3D ($f \approx 236$). Esto resalta la importancia de tunear el peso de inercia al aumentar las dimensiones.</li>
+</ul>
+</li>
+<li>
+<p><strong>Evolución Diferencial (DE):</strong></p>
+<ul>
+<li><strong>Consistencia:</strong> Es el ganador absoluto en términos de escalabilidad. Tanto en 2D como en 3D, alcanzó el óptimo global de Rosenbrock con precisión de máquina ($0.00e+00$) y fue el método más eficaz para navegar la complejidad de Schwefel 3D. Su operador de mutación basado en diferencias vectoriales parece ser el más apto para manejar las correlaciones entre dimensiones.</li>
+</ul>
+</li>
+</ol>
+<h3>4.2 Visualización Dinámica y Comportamiento Paso a Paso</h3>
+<p>Para comprender la mecánica interna de estos algoritmos, generamos visualizaciones dinámicas que muestran el proceso de optimización paso a paso. La comparación entre el enfoque determinista del gradiente y el enfoque estocástico poblacional revela lecciones valiosas sobre la exploración vs. explotación.</p>
 <div class="gallery-grid"><div class="gallery-item">
-![Figura 1: Convergencia del Gradiente Descendente (GD) en la función de Rosenbrock (3D). Nótese cómo la trayectoria fluye por el valle hacia el óptimo en un rastro continuo.](./resultados/gd_rosenbrock_3D.gif)
+<img src="./resultados/gd_rosenbrock_2D.gif" alt="Figura 1: Convergencia del Gradiente Descendente (GD) en Rosenbrock (2D). El agente sigue la pendiente más pronunciada de forma lineal.">
 </div><div class="gallery-item">
-![Figura 2: Comportamiento del Optimización por Enjambre de Partículas (PSO) en la función de Schwefel (3D). Las partículas exploran todo el panorama superando los trampas locales.](./resultados/pso_schwefel_3D.gif)
+![Figura 2: Evolución del PSO en Schwefel (2D). La nube de partículas "escanea" el terreno antes de colapsar hacia el valle más profundo.](./resultados/pso_schwefel_2D.gif)
+</div><div class="gallery-item">
+![Figura 3: Trayectoria del Gradiente (GD) en Rosenbrock (3D). Se observa el flujo continuo hacia el fondo del valle parabólico.](./resultados/gd_rosenbrock_3D.gif)
+</div><div class="gallery-item">
+![Figura 4: PSO en Schwefel (3D). Las partículas superan múltiples cimas y valles locales en un espacio tridimensional complejo.](./resultados/pso_schwefel_3D.gif)
 </div></div>
 
-<h3>4.3 Robustez a través de Múltiples Corridas</h3>
-<p>La optimización estocástica puede variar según la semilla aleatoria inicial. Para validarlo, realizamos 30 corridas independientes. </p>
-<p><img alt="Figura 3: Gráfica de caja (Boxplot) de 30 corridas independientes midiendo la estabilidad de los algoritmos heurísticos." src="./resultados/boxplot_multiples_corridas.png" /></p>
-<p>Como se describe en la <strong>Figura 3</strong>, observamos que la Evolución Diferencial (DE) y el Enjambre de Partículas (PSO) mantienen en todas las corridas una dispersión casi nula respecto al óptimo global, demostrando alta robustez estadística frente a las variaciones del espacio de convergencia.</p>
+<p>Como se ilustra en las <strong>Figuras 1 a 4</strong>, el gradiente se desplaza como un rastro continuo (una línea), lo que lo hace altamente susceptible a quedar bloqueado por "muros" matemáticos o mínimos locales. En contraste, las heurísticas como el PSO despliegan una red de exploradores que intercambian información, permitiéndoles "saltar" entre valles y encontrar mejores soluciones globales a costa de un mayor número de evaluaciones de la función objetivo.</p>
+<h3>4.3 Robustez y Análisis Estadístico (Múltiples Corridas)</h3>
+<p>Dado que los métodos heurísticos son estocásticos, un solo éxito podría ser producto del azar. Para validar científicamente nuestros hallazgos, realizamos <strong>30 ejecuciones independientes</strong> para cada algoritmo sobre la función de Rosenbrock en 3D, utilizando diferentes semillas aleatorias.</p>
+<p><img alt="Figura 5: Gráfica de caja (Boxplot) que muestra la distribución del error tras 30 corridas independientes." src="./resultados/boxplot_multiples_corridas.png" /></p>
+<p>El análisis de la <strong>Figura 5</strong> permite extraer conclusiones estratégicas sobre la robustez:
+1. <strong>Evolución Diferencial (DE):</strong> Presenta una dispersión casi nula y una precisión de orden de magnitud superior, consolidándose como el método más confiable.
+2. <strong>PSO:</strong> Aunque altamente efectivo, muestra una ligera variabilidad (outliers) dependiendo de la inercia inicial de las partículas.
+3. <strong>Algoritmos Evolutivos (AE):</strong> Logran convergencia, pero con una varianza mayor debido a la naturaleza aleatoria de la mutación uniforme.</p>
+<p>Esta discusión estadística confirma que para problemas de alta dimensionalidad o topologías escabrosas, la <strong>Evolución Diferencial</strong> ofrece la mejor relación entre estabilidad y rendimiento.</p>
 <hr />
 <h2>5. Experimentación y Resultados: Vendedor Viajero Mexicano</h2>
 <p>Luego de dominar el relieve matemático continuo, pasamos a las rutas logísticas y a problemas discretos, intentando crear la ruta menos costosa para recorrer las capitales de México.</p>
-<h3>5.1 Justificación Técnica del Costo</h3>
-<p>Nuestra función objetivo no minimiza la distancia, minimiza los <strong>pesos mexicanos (MXN)</strong>. Tomando decisiones realistas apoyadas por literatura:</p>
+<h3>5.1 Justificación Técnica del Modelo de Costos</h3>
+<p>Nuestra función objetivo no minimiza la distancia geométrica, sino el impacto financiero real en <strong>pesos mexicanos (MXN)</strong>. El modelo se sustenta en premisas técnicas y fuentes oficiales:</p>
 <ul>
-<li><strong>Vehículo y Combustible:</strong> Suponemos un Nissan Versa, líder de mercado (INEGI, 2017), rindiendo 7 L / 100km. A un costo estimado de \$26 MXN por litro (CRE, 2023), da como resultado un estimado de <strong>\$1.82 MXN / km</strong>.</li>
-<li><strong>Peajes y Caminos:</strong> Con base en promedios del tabulador oficial (CAPUFE, 2023), agregamos <strong>\$4.00 MXN / km</strong>.</li>
-<li><strong>Costo de Oportunidad (Salario):</strong> Un salario general de \$10,000 MXN / mes (Secretaría del Trabajo, 2023), equivale a \$333 MXN / día. Suponiendo una capacidad de conducir 800 km / día, nos refleja un factor de <strong>\$0.42 MXN / km</strong>.</li>
+<li><strong>Vehículo y Combustible:</strong> Se seleccionó el Nissan Versa (modelo más vendido en México) (INEGI, 2017). Con un rendimiento de 7 L / 100km y un precio promedio de \$26 MXN por litro de gasolina (Comisión Reguladora de Energía [CRE], 2023), el costo operativo por combustible es de <strong>\$1.82 MXN / km</strong>.</li>
+<li><strong>Peajes y Caminos:</strong> Utilizando los tabuladores vigentes para la red carretera federal (Caminos y Puentes Federales [CAPUFE], 2023), se promedió un costo adicional de <strong>\$4.00 MXN / km</strong>.</li>
+<li><strong>Costo de Oportunidad (Recurso Humano):</strong> Con base en las estadísticas de la fuerza laboral y salarios mínimos (Secretaría del Trabajo y Previsión Social [STPS], 2023), se estimó un salario de \$10,000 MXN / mes (\$333 MXN / día). Asumiendo una conducción de 800 km diarios, el factor de salario es de <strong>\$0.42 MXN / km</strong>.</li>
 </ul>
-<p>Este modelo de costos agrega un alto realismo al problema TSP.</p>
-<h3>5.2 Evolución de la Heurística: Hormigas vs. Genética</h3>
-<p>Modelamos la solución desde dos trincheras: el Rastro de Feromonas (ACO) y la Supervivencia del más apto (Generación). </p>
-<p><img alt="Figura 4: Curva comparativa de convergencia del Algoritmo Genético frente al método de Colonia de Hormigas (ACO) minimizando el costo total en MXN." src="./resultados/convergencia_ag_vs_aco.png" /></p>
-<p>Tal y como se observa en la <strong>Figura 4</strong>, el Algoritmo Genético encuentra un régimen de alto descenso inicial y estabiliza a un costo inferior de forma constante en contraste con las colonias de hormigas que rápidamente estancan sin alcanzar un valle profundo.</p>
-<h3>5.3 Animación de las Rutas Óptimas</h3>
-<p>A continuación, exponemos la animación iteración por iteración de cómo los algoritmos van encontrando el arreglo perfecto en el mapa nacional:</p>
+<p>Este modelo integral confiere validez técnica al problema del TSP, transformándolo de un ejercicio abstracto a una simulación de logística real.</p>
+<h3>5.2 Configuración Experimental y Proceso Iterativo</h3>
+<p>Para resolver este desafío combinatorio, enfrentamos dos paradigmas bioinspirados con las siguientes configuraciones:</p>
+<ol>
+<li><strong>Algoritmo Genético (AG):</strong> Población de 100 individuos, 500 generaciones, selección por torneo, cruce de orden (OX1), mutación por intercambio (<em>swap</em>) con probabilidad de 0.05 y elitismo de 5 individuos.</li>
+<li><strong>Optimización por Colonia de Hormigas (ACO):</strong> 32 hormigas (una por cada capital), 200 iteraciones, factor de evaporación de feromona de 0.1 y constante de intensificación de 2.</li>
+</ol>
+<p>La <strong>Figura 6</strong> ilustra la curva de convergencia comparativa. Se observa cómo el AG, gracias a su exploración a través de operadores de cruce, logra descensos de costo más profundos y estables en comparación con el ACO, que tiende a estancarse prematuramente en mínimos locales de la red.</p>
+<p><img alt="Figura 6: Curva comparativa de convergencia del Algoritmo Genético frente al método de Colonia de Hormigas (ACO) minimizando el costo total en MXN." src="./resultados/convergencia_ag_vs_aco.png" /></p>
+<h3>5.3 Visualización Geográfica y Evolución de la Ruta</h3>
+<p>La verdadera validación técnica de la solución reside en su visualización sobre el mapa nacional. Las animaciones permiten apreciar el proceso de "desenredo" de la ruta, donde las conexiones cruzadas (ineficientes) son eliminadas iteración tras iteración.</p>
 <div class="gallery-grid"><div class="gallery-item">
-![Figura 5: Animación del Algoritmo Genético (AG). El cableado cruza gradualmente menos, logrando desenredarse de forma magistral hasta crear el circulo óptimo.](./resultados/gif_ruta_ag.gif)
+<img src="./resultados/gif_ruta_ag.gif" alt="Figura 7: Evolución dinámica del Algoritmo Genético (AG). La ruta evoluciona hasta formar un ciclo eficiente que recorre las fronteras y el centro del país.">
 </div><div class="gallery-item">
-![Figura 6: Evolución dinámica generada por el optimizador por Colonias de Hormigas (ACO) sobre el mapa de las 32 capitales de México.](./resultados/gif_ruta_aco.gif)
+![Figura 8: Evolución dinámica generada por el optimizador por Colonias de Hormigas (ACO) sobre el mapa de las 32 capitales de México.](./resultados/gif_ruta_aco.gif)
 </div></div>
 
-<p>Como evidencian las <strong>Figuras 5 y 6</strong>, las mejoras de la ruta iteración con iteración demuestran el intenso proceso de aprendizaje biológico. La ruta encontrada por el algoritmo genético es técnicamente válida y asombrosamente de bajo costo, bajando consistentemente y "desenredando" visualmente la red hasta quedar un círculo casi perfecto a lo largo de las fronteras de nuestro país.</p>
+<p>Como evidencian las <strong>Figuras 7 y 8</strong>, el algoritmo genético logra una solución visualmente armónica y técnicamente de menor costo. La convergencia hacia una ruta que evita cruces es un indicador geométrico de la calidad del óptimo encontrado.</p>
 <hr />
 <h2>6. Discusión</h2>
 <p>Si entrelazamos estos descubrimientos, nos percatamos que la naturaleza posee herramientas matemáticas muy valiosas:
-1. Al contrastar iterativamente los resultados en escenarios espaciales, como lo revelado en las <strong>Figuras 1 y 2</strong>, notamos que un Gradiente Descendiente requiere condiciones inmaculadas para funcionar, sufriendo "miopía matemática". Las heurísticas, por otro lado, sacrifican elegancia simbólica por pragmatismo computacional.
-2. La robustez demostrada en el Boxplot de la <strong>Figura 3</strong> nos da la tranquilidad de que tácticas como la Evolución Diferencial no son golpes de suerte.
-3. Finalmente, como lo demuestran categóricamente las animaciones en el mapa de las <strong>Figuras 5 y 6</strong>, los algoritmos biológicos transforman el caos estructural en rutas altamente eficientes, permitiendo a empresas del mundo real ahorrar enormes montos operativos.</p>
+1. Al contrastar iterativamente los resultados en escenarios espaciales, como lo revelado en las <strong>Figuras 1 a 4</strong>, notamos que un Gradiente Descendiente requiere condiciones inmaculadas para funcionar, sufriendo "miopía matemática". Las heurísticas, por otro lado, sacrifican elegancia simbólica por pragmatismo computacional.
+2. La robustez demostrada en el Boxplot de la <strong>Figura 5</strong> nos da la tranquilidad de que tácticas como la Evolución Diferencial no son golpes de suerte.
+3. Finalmente, como lo demuestran categóricamente las animaciones en el mapa de las <strong>Figuras 7 y 8</strong>, los algoritmos biológicos transforman el caos estructural en rutas altamente eficientes, permitiendo a empresas del mundo real ahorrar enormes montos operativos.</p>
 <hr />
 <h2>7. Conclusión</h2>
 <p>A través de rigurosos ejercicios que comprendieron simulaciones de funciones numéricas complejas y la optimización de gastos de viáticos a nivel nacional (TSP), hemos demostrado empíricamente el valor incomparable de la Optimización Computacional Heurística. 
 Los métodos estocásticos, a pesar de sus pesados requerimientos de evaluaciones poblacionales, compensan con creces garantizando su escape de trampas locales y encontrando rumbos creativos (y validables) ante problemas masivos.</p>
 <hr />
 <h2>8. Bibliografía</h2>
-<ul>
-<li>Caminos y Puentes Federales de Ingresos y Servicios Conexos (CAPUFE). (2023). <em>Tarifas vigentes de la red carretera</em>. Gobierno de México. Extraído de https://www.gob.mx/capufe</li>
-<li>Comisión Reguladora de Energía (CRE). (2023). <em>Precios promedios nacionales de combustibles</em>. Datos Abiertos del Gobierno de México.</li>
-<li>Dorigo, M., &amp; Gambardella, L. M. (1997). Ant colony system: A cooperative learning approach to the traveling salesman problem. <em>IEEE Transactions on Evolutionary Computation</em>, 1(1), 53-66.</li>
-<li>Goldberg, D. E. (1989). <em>Genetic Algorithms in Search, Optimization, and Machine Learning</em>. Addison-Wesley Professional.</li>
-<li>Instituto Nacional de Estadística y Geografía (INEGI). (2017). <em>Registro Administrativo de la Industria Automotriz de Vehículos Ligeros</em>.</li>
-<li>Kennedy, J., &amp; Eberhart, R. (1995). Particule swarm optimization. <em>Proceedings of ICNN'95 - International Conference on Neural Networks</em>, 1942-1948.</li>
-<li>Secretaría del Trabajo y Previsión Social (STPS). (2023). <em>Estadísticas de la fuerza laboral y salarios promedios</em>. Gobierno de México.</li>
-<li>Storn, R., &amp; Price, K. (1997). Differential evolution – A simple and efficient heuristic for global optimization over continuous spaces. <em>Journal of Global Optimization</em>, 11(4), 341-359.</li>
-</ul>
+<p>Caminos y Puentes Federales (CAPUFE). (2023). <em>Tarifas vigentes de la red carretera federal</em>. Gobierno de México. https://www.gob.mx/capufe</p>
+<p>Comisión Reguladora de Energía (CRE). (2023). <em>Precios promedios nacionales de combustibles (Gasolinas y Diésel)</em>. Gobierno de México.</p>
+<p>Dorigo, M., &amp; Gambardella, L. M. (1997). Ant colony system: A cooperative learning approach to the traveling salesman problem. <em>IEEE Transactions on Evolutionary Computation</em>, <em>1</em>(1), 53-66. https://doi.org/10.1109/4235.585892</p>
+<p>Goldberg, D. E. (1989). <em>Genetic algorithms in search, optimization, and machine learning</em>. Addison-Wesley Professional.</p>
+<p>Instituto Nacional de Estadística y Geografía (INEGI). (2017). <em>Registro administrativo de la industria automotriz de vehículos ligeros</em>. https://www.inegi.org.mx/</p>
+<p>Kennedy, J., &amp; Eberhart, R. (1995). Particle swarm optimization. En <em>Proceedings of ICNN'95 - International Conference on Neural Networks</em> (Vol. 4, pp. 1942-1948). IEEE. https://doi.org/10.1109/ICNN.1995.488968</p>
+<p>Secretaría del Trabajo y Previsión Social (STPS). (2023). <em>Informe mensual sobre el comportamiento de la fuerza laboral y salarios mínimos</em>. Gobierno de México.</p>
+<p>Storn, R., &amp; Price, K. (1997). Differential evolution – A simple and efficient heuristic for global optimization over continuous spaces. <em>Journal of Global Optimization</em>, <em>11</em>(4), 341-359. https://doi.org/10.1007/BF00140589</p>
 <hr />
 <h2>9. Declaración de Contribuciones</h2>
 <p>El conjunto de los trabajos presentados en este informe ha sido realizado íntegramente por <strong>Cyriac SALIGNAT</strong> y <strong>Juan José Zapata Moreno</strong>. La distribución es la siguiente:</p>

@@ -20,6 +20,16 @@ def build_html():
     # Convertir a HTML
     html_content = markdown.markdown(text, extensions=['tables', 'fenced_code'])
 
+    # Corregir imágenes dentro de gallery-grid que no fueron convertidas por el parser de markdown
+    # (markdown no procesa contenido dentro de bloques HTML de forma predeterminada)
+    def fix_md_images(match):
+        inner_content = match.group(1)
+        # Reemplazar ![alt](url) por <img src="url" alt="alt">
+        fixed = re.sub(r'!\[(.*?)\]\((.*?)\)', r'<img src="\2" alt="\1">', inner_content)
+        return f'<div class="gallery-grid">{fixed}</div>'
+
+    html_content = re.sub(r'<div class="gallery-grid">(.*?)</div>', fix_md_images, html_content, flags=re.DOTALL)
+
     # Estilo académico (Tipo "Paper" de investigación o Scientific Blog, fondo blanco, tabla estilo Booktabs)
     template = f"""<!DOCTYPE html>
 <html lang="es">
