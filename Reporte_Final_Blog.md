@@ -64,9 +64,24 @@ Para garantizar la rigurosidad técnica, sometimos a los algoritmos de Descenso 
 | | | Enjambre (PSO) | 2.36e+02 (Atrapado) | 15,050 |
 | | | Diferencial (DE) | 3.81e-05 | 3,244 |
 
-Como se evidencia en la **Tabla 1**, el rendimiento varía drásticamente según la topología y la dimensionalidad:
-- En **Rosenbrock**, el DE y el PSO superan consistentemente al GD, especialmente en 3D donde la "miopía" del gradiente dificulta la navegación por el estrecho valle parabólico.
-- En **Schwefel**, el desafío de los mínimos locales se vuelve crítico en 3D. Mientras que el GD queda irremediablemente atrapado en un mínimo local lejano ($f \approx 908$), los métodos heurísticos como el DE y el AE logran explorar el espacio globalmente para encontrar la región del óptimo verdadero.
+Como se evidencia en la **Tabla 1**, el rendimiento varía drásticamente según la topología y la dimensionalidad. A continuación, desglosamos el comportamiento observado:
+
+#### 4.1.1 Análisis del Escalado Dimensional
+
+1.  **Descenso por Gradiente (GD):**
+    *   **2D:** Es extremadamente eficiente en Rosenbrock si el punto inicial es favorable, logrando una sintonía fina rápida.
+    *   **Transición a 3D:** El costo computacional (evaluaciones) aumenta significativamente para mantener la precisión. En Schwefel 3D, el GD muestra su mayor debilidad: la incapacidad total de escapar de mínimos locales, quedando atrapado en valores de función muy altos ($f \approx 908$).
+
+2.  **Algoritmo Evolutivo (AE):**
+    *   **2D:** Ofrece una exploración sólida, aunque a veces con una convergencia más lenta hacia el valor exacto 0 en comparación con DE.
+    *   **Transición a 3D:** Demuestra una robustez notable. En Schwefel 3D, superó al PSO en esta instancia particular, encontrando una región muy cercana al óptimo global ($f \approx 0.016$), lo que confirma que su mecanismo de mutación mantiene la diversidad necesaria en espacios de mayor dimensión.
+
+3.  **Optimización por Enjambre de Partículas (PSO):**
+    *   **2D:** Excelente velocidad de convergencia. "Caza" el óptimo de Rosenbrock casi instantáneamente.
+    *   **Transición a 3D:** Aunque sigue siendo superior al gradiente, el PSO puede sufrir de convergencia prematura si el enjambre colapsa demasiado rápido en un mínimo local fuerte, como se observó en Schwefel 3D ($f \approx 236$). Esto resalta la importancia de tunear el peso de inercia al aumentar las dimensiones.
+
+4.  **Evolución Diferencial (DE):**
+    *   **Consistencia:** Es el ganador absoluto en términos de escalabilidad. Tanto en 2D como en 3D, alcanzó el óptimo global de Rosenbrock con precisión de máquina ($0.00e+00$) y fue el método más eficaz para navegar la complejidad de Schwefel 3D. Su operador de mutación basado en diferencias vectoriales parece ser el más apto para manejar las correlaciones entre dimensiones.
 
 ### 4.2 Visualización Dinámica y Comportamiento Paso a Paso
 
