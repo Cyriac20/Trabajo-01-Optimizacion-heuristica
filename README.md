@@ -1,162 +1,183 @@
-# Trabajo 01 – Optimización Heurística
+<div align="center">
+  <h1>🧭 Optimización Heurística — Trabajo 01</h1>
+  <p><em>Descenso por gradiente, metaheurísticas y TSP sobre las capitales de México</em></p>
 
-**Asignatura:** Analítica Descriptiva (Programación en Python / MapReduce)  
-**Repositorio:** `PRE-02-programacion-en-python-mapreduce-jjzm0521`
+  <a href="PENDIENTE_PEGAR_LINK_DEL_BLOG">
+    <img src="https://img.shields.io/badge/Reporte_Técnico-Blog-0F172A?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Reporte Técnico"/>
+  </a>
+  <a href="https://github.com/Cyriac20/Trabajo-01-Optimizacion-heuristica">
+    <img src="https://img.shields.io/badge/Código-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="Repositorio GitHub"/>
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
+</div>
 
----
+<br>
 
-## Descripción
+Proyecto desarrollado para el curso de **Analítica Descriptiva**, enfocado en comparar métodos de optimización numérica y combinatoria. En la primera parte se optimizan funciones benchmark en 2D y 3D; en la segunda se resuelve una variante del Problema del Vendedor Viajero con las 32 capitales de los estados de México.
 
-Este trabajo implementa y compara métodos de optimización numérica y combinatoria:
+## 🎯 Objetivo
 
-- **Parte 1:** Optimización de funciones de prueba continuas (Rosenbrock y Schwefel) con descenso por gradiente y métodos heurísticos (AE, PSO, DE).  
-- **Parte 2:** Problema del Vendedor Viajero por las 32 capitales de los estados de México, resuelto con Colonias de Hormigas (ACO) y Algoritmo Genético (AG).
-
----
-
-## Estructura del repositorio
-
-```
-Trabajo-01-Optimizacion-heuristica/
-│
-├── data/
-│   └── mexico.jpg                        # Mapa base de México
-│
-├── notebooks/
-│   └── Parte1_Optimizacion_Heuristica.ipynb   # Parte 1 completa (AE, PSO, DE, GD, GIFs)
-│
-├── scripts/
-│   ├── AntColonyOptimizer.py             # Clase ACO (implementación base)
-│   ├── descenso_gradiente.py             # Descenso por gradiente simbólico (sympy)
-│   ├── evolucion_differencial.py         # Operadores DE (mutación, cruce)
-│   ├── vendedor_mexicano.py              # TSP México – Colonia de Hormigas (ACO)
-│   └── genetico_vendedor.py             # TSP México – Algoritmo Genético (AG) + GIF
-│
-├── resultados/
-│   ├── superficies_2D.png               # Superficies de Rosenbrock y Schwefel
-│   ├── convergencia_heuristica.png      # Convergencia AE / PSO / DE (Parte 1)
-│   ├── gd_rosenbrock_2D.gif             # GIF: descenso por gradiente – Rosenbrock 2D
-│   ├── gd_schwefel_2D.gif               # GIF: descenso por gradiente – Schwefel 2D
-│   ├── pso_rosenbrock_2D.gif            # GIF: PSO – Rosenbrock 2D
-│   ├── pso_schwefel_2D.gif              # GIF: PSO – Schwefel 2D
-│   ├── ruta_vendedor_mexicano.png       # Mapa final – ruta óptima ACO
-│   ├── ruta_ag_mexico.png               # Mapa final – ruta óptima AG
-│   ├── gif_ruta_ag.gif                  # GIF: evolución de la ruta AG en el mapa
-│   └── convergencia_ag_vs_aco.png       # Comparativa de convergencia AG vs ACO
-│
-├── Discusion.md                          # Análisis: gradiente vs heurísticos
-├── requirements.txt                      # Dependencias Python
-└── README.md                             # Este archivo
-```
+Evaluar el comportamiento de métodos clásicos y heurísticos frente a problemas con distinta geometría: superficies continuas con mínimos locales y un problema combinatorio de rutas. La comparación considera valor final de la función objetivo, número de evaluaciones, múltiples corridas experimentales y visualizaciones animadas del proceso de optimización.
 
 ---
 
-## Instalación de dependencias
+## 🚀 Entregables
+
+1. **[📄 Reporte Técnico / Blog Post](PENDIENTE_PEGAR_LINK_DEL_BLOG)**: metodología, resultados, discusión, bibliografía APA y análisis de uso de IA.
+2. **🧪 Notebook de Optimización Numérica**: experimentos en Rosenbrock y Schwefel con descenso por gradiente, algoritmo evolutivo, PSO y evolución diferencial.
+3. **🗺️ TSP Mexicano**: solución con algoritmo genético y colonia de hormigas, incluyendo visualización sobre mapa de México.
+4. **🎞️ Animaciones**: GIFs del proceso de optimización numérica y de la evolución de rutas para el TSP.
+
+---
+
+## 🧠 Metodología
+
+### Parte 1: Optimización Numérica
+
+Funciones seleccionadas:
+
+- **Rosenbrock**: función de valle estrecho, útil para evaluar precisión local y estabilidad de convergencia.
+- **Schwefel**: función multimodal, útil para probar exploración global y resistencia a mínimos locales.
+
+Métodos comparados:
+
+- Descenso por gradiente con condición inicial aleatoria.
+- Algoritmo evolutivo.
+- Optimización por enjambre de partículas (PSO).
+- Evolución diferencial (DE).
+
+### Parte 2: Optimización Combinatoria
+
+Se modeló un recorrido por las 32 capitales mexicanas. El costo entre ciudades se calcula con:
+
+- Distancia Haversine corregida por un factor de ruta.
+- Costo de combustible.
+- Costo de peajes.
+- Costo del tiempo del vendedor.
+
+El modelo de costos fue reforzado con fuentes para gasolina, peajes y salario.
+
+---
+
+## 🛠️ Instalación y Replicación
+
+### 1. Requisitos previos
+
+- Python 3.10 o superior.
+- Git.
+
+### 2. Configuración del entorno
 
 ```bash
+# Clonar el repositorio
+git clone https://github.com/Cyriac20/Trabajo-01-Optimizacion-heuristica.git
+cd Trabajo-01-Optimizacion-heuristica
+
+# Crear y activar entorno virtual en Windows
+python -m venv .venv
+.venv\Scripts\activate
+
+# Instalar dependencias
 pip install -r requirements.txt
 ```
 
-Las dependencias son: `numpy`, `matplotlib`, `scipy`, `imageio`, `sympy`.
+### 3. Ejecutar experimentos
 
----
-
-## Cómo ejecutar
-
-### Parte 1 – Optimización numérica (notebook)
+Parte 1:
 
 ```bash
-cd notebooks
-jupyter notebook Parte1_Optimizacion_Heuristica.ipynb
+jupyter notebook notebooks/Parte1_Optimizacion_Heuristica.ipynb
 ```
 
-El notebook ejecuta todas las celdas en orden y guarda los resultados en `resultados/`.
+Parte 2 — Colonia de Hormigas:
 
-### Parte 2 – TSP México
-
-#### Colonias de Hormigas (ACO)
 ```bash
 cd scripts
 python vendedor_mexicano.py
 ```
-Genera `resultados/ruta_vendedor_mexicano.png`.
 
-#### Algoritmo Genético (AG) + GIF animado
+Parte 2 — Algoritmo Genético:
+
 ```bash
 cd scripts
 python genetico_vendedor.py
 ```
-Genera:
-- `resultados/ruta_ag_mexico.png`
-- `resultados/gif_ruta_ag.gif`
-- `resultados/convergencia_ag_vs_aco.png`
 
 ---
 
-## Metodología
+## 📂 Arquitectura del Repositorio
 
-### Parte 1 – Funciones de prueba elegidas
-
-| Función | Dimensiones | Óptimo global |
-|---------|-------------|---------------|
-| **Rosenbrock** | 2D y 3D | f(1,…,1) = 0 |
-| **Schwefel**   | 2D y 3D | f(420.97,…) ≈ 0 |
-
-**Métodos aplicados:**
-1. Descenso por gradiente (sympy + gradiente numérico, condición inicial aleatoria)
-2. Algoritmo Evolutivo (AE) — selección por ranking, cruce de un punto, mutación uniforme
-3. PSO — peso de inercia, componente cognitiva y social
-4. Evolución Diferencial (DE) — usando `scipy.optimize.differential_evolution`
-
-### Parte 2 – TSP México
-
-**Costo de desplazamiento entre ciudades** (por km):
-
-| Concepto | Valor |
-|----------|-------|
-| Vehículo | Nissan Versa (modelo más vendido en México, 2017) |
-| Combustible | 7 L/100 km × 26 MXN/L = **1.82 MXN/km** |
-| Peajes | **4 MXN/km** |
-| Hora del vendedor | 10,000 MXN/mes → 333 MXN/día; a 800 km/día = **0.42 MXN/km** |
-| **Total aprox.** | **~6.24 MXN/km** |
-
-Las distancias se calculan con la fórmula de Haversine × 1.2 (factor de corrección de ruta real).
-
-**ACO:** 32 hormigas, 200 iteraciones, evaporación 0.1, intensificación 2.
-
-**AG:** 100 individuos, 500 generaciones, cruce OX1, mutación swap (p=0.05), elitismo k=5.
-
----
-
-## Resultados principales
-
-> Los valores exactos se obtienen al ejecutar los scripts. A modo de referencia:
-
-- **Rosenbrock 2D:** PSO y DE encuentran valores cercanos a 0 (óptimo global), GD queda atrapado en mínimos locales con puntos iniciales desfavorables.
-- **Schwefel 2D:** Los métodos heurísticos (especialmente DE y PSO) superan claramente al gradiente gracias a su capacidad de exploración global.
-- **TSP México:** Ambos métodos (ACO y AG) encuentran rutas competitivas; el GIF `gif_ruta_ag.gif` muestra la convergencia generación a generación.
-
-Ver `Discusion.md` para el análisis completo.
+```text
+|-- data/
+|   `-- mexico.jpg
+|
+|-- notebooks/
+|   `-- Parte1_Optimizacion_Heuristica.ipynb
+|
+|-- scripts/
+|   |-- AntColonyOptimizer.py
+|   |-- descenso_gradiente.py
+|   |-- evolucion_differencial.py
+|   |-- genetico_vendedor.py
+|   `-- vendedor_mexicano.py
+|
+|-- resultados/
+|   |-- gd_rosenbrock_2D.gif
+|   |-- gd_rosenbrock_3D.gif
+|   |-- gd_schwefel_2D.gif
+|   |-- gd_schwefel_3D.gif
+|   |-- ae_rosenbrock_2D.gif
+|   |-- ae_schwefel_2D.gif
+|   |-- pso_rosenbrock_2D.gif
+|   |-- pso_rosenbrock_3D.gif
+|   |-- pso_schwefel_2D.gif
+|   |-- pso_schwefel_3D.gif
+|   |-- gif_ruta_ag.gif
+|   |-- gif_ruta_aco.gif
+|   |-- ruta_ag_mexico.png
+|   |-- ruta_vendedor_mexicano.png
+|   |-- convergencia_ag_vs_aco.png
+|   |-- convergencia_heuristica.png
+|   `-- boxplot_multiples_corridas.png
+|
+|-- Reporte_Final_Blog.md
+|-- reporte-tecnico-blog.html
+|-- VERIFICACION_ENTREGA.md
+|-- PLAN_DE_ACCION_MEJORAS.md
+|-- requirements.txt
+`-- README.md
+```
 
 ---
 
-## Animaciones
+## 📊 Resultados Destacados
 
-| Archivo | Descripción |
-|---------|-------------|
-| `gd_rosenbrock_2D.gif` | Trayectoria del gradiente sobre el contorno de Rosenbrock |
-| `gd_schwefel_2D.gif`   | Trayectoria del gradiente sobre Schwefel (se queda en mínimo local) |
-| `pso_rosenbrock_2D.gif`| Nube de partículas PSO en Rosenbrock |
-| `pso_schwefel_2D.gif`  | Nube de partículas PSO en Schwefel |
-| `gif_ruta_ag.gif`      | Evolución de la ruta del vendedor (AG) sobre el mapa de México |
+- En **Rosenbrock**, los métodos basados en gradiente pueden acercarse al óptimo, pero son sensibles a la tasa de aprendizaje y a la condición inicial.
+- En **Schwefel**, los métodos heurísticos tienen ventaja clara por su capacidad de exploración global.
+- En el **TSP mexicano**, el algoritmo genético mantuvo diversidad durante más generaciones, mientras que ACO converge rápido pero puede estancarse por concentración de feromonas.
+- Las visualizaciones animadas permiten observar la diferencia entre explotación local y exploración poblacional.
 
 ---
 
-## Referencias
+## ✅ Verificación de Entrega
 
-Ver bibliografía completa en el reporte técnico (blog). Principales fuentes:
+El archivo [`VERIFICACION_ENTREGA.md`](VERIFICACION_ENTREGA.md) resume cómo se atendieron las observaciones de la retroalimentación:
 
-- Kennedy, J., & Eberhart, R. (1995). Particle swarm optimization. *Proceedings of ICNN*.
-- Storn, R., & Price, K. (1997). Differential evolution. *Journal of Global Optimization*, 11(4), 341–359.
-- Dorigo, M., & Gambardella, L. M. (1997). Ant colony system. *IEEE Transactions on Evolutionary Computation*, 1(1), 53–66.
+- Ejecución 2D y 3D.
+- GIFs de descenso por gradiente y heurísticas.
+- Múltiples corridas experimentales.
+- Modelo de costos con fuentes.
+- Figuras y tablas rotuladas.
+- Bibliografía en formato APA.
+
+El video de contribución individual fue entregado por separado.
+
+---
+
+## 📚 Bibliografía y Referencias Clave
+
+- Dorigo, M., & Gambardella, L. M. (1997). *Ant colony system: A cooperative learning approach to the traveling salesman problem*. IEEE Transactions on Evolutionary Computation.
 - Goldberg, D. E. (1989). *Genetic Algorithms in Search, Optimization, and Machine Learning*. Addison-Wesley.
+- Kennedy, J., & Eberhart, R. (1995). *Particle swarm optimization*. Proceedings of ICNN.
+- Rosenbrock, H. H. (1960). *An automatic method for finding the greatest or least value of a function*. The Computer Journal.
+- Storn, R., & Price, K. (1997). *Differential evolution: A simple and efficient heuristic for global optimization over continuous spaces*. Journal of Global Optimization.

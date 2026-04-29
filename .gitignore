@@ -1,1 +1,22 @@
-.venv
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Archivos temporales de ejecución
+resultados/_tmp_*.png
+*.log
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

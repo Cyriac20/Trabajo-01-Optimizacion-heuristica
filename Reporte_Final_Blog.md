@@ -1,153 +1,155 @@
-# Explorando el Horizonte de la Optimización: De los Valles Matemáticos al Relieve de México
+# Explorando el horizonte de la optimización: de los valles matemáticos al relieve de México
 
 **Autores:** Cyriac SALIGNAT y Juan José Zapata Moreno  
-**Fecha:** Marzo 2026 | **Asignatura:** Analítica Descriptiva  
-
----
+**Asignatura:** Analítica Descriptiva  
+**Repositorio:** <https://github.com/Cyriac20/Trabajo-01-Optimizacion-heuristica>
 
 ## 1. Introducción
 
-La optimización es el motor invisible que impulsa la toma de decisiones en el mundo moderno moderno. Desde el diseño de redes neuronales hasta la planificación de rutas logísticas, encontrar el "mejor" resultado bajo un conjunto de restricciones es un arte y una ciencia. 
+Este reporte presenta un trabajo de optimización dividido en dos partes. En la primera se comparan métodos de optimización continua sobre funciones de prueba clásicas. En la segunda se resuelve una versión del Problema del Vendedor Viajero sobre las 32 capitales de los estados de México, usando costos económicos y no solo distancia.
 
-En este reporte (presentado en formato de blog), te invitamos a acompañarnos en un viaje iterativo. Exploraremos dos de los dominios más fascinantes de esta disciplina: la **o**ptimización numérica continua**, donde el desafío es navegar valles matemáticos traicioneros para encontrar el punto más bajo; y la **optimización combinatoria**, donde el reto consiste en descifrar el orden perfecto oculto entre millones de permutaciones (aplicado al Problema del Vendedor Viajero en México).
+El reporte final en formato blog visual está disponible en `reporte-tecnico-blog.html`. Este Markdown funciona como fuente editable y guía de trazabilidad para la entrega.
 
----
+## 2. Planteamiento del problema
 
-## 2. Planteamiento del Problema
+En la Parte 1 se seleccionaron dos funciones de prueba: Rosenbrock y Schwefel. Ambas se optimizaron en dos y tres dimensiones usando descenso por gradiente con condición inicial aleatoria, algoritmo evolutivo, optimización por enjambre de partículas (PSO) y evolución diferencial (DE).
 
-Para poner a prueba nuestras estrategias, dividimos el proyecto en dos partes fundamentales:
+En la Parte 2 se formuló un TSP sobre las 32 capitales mexicanas. La función objetivo minimiza el costo total del recorrido, calculado como suma de combustible, peajes y valor del tiempo del vendedor.
 
-1. **Optimización Numérica Continua:**
-   Enfrentamos a nuestros algoritmos a dos topologías clásicas:
-   - *Función de Rosenbrock:* Un valle estrecho, pronunciado y en forma de parábola. Encontrar el valle es sencillo, pero converger al óptimo global (0,0) exige alta precisión.
-   - *Función de Schwefel:* Un terreno sinuoso, repleto de múltiples cerros y mínimos locales profundos. Ideal para causar que algoritmos simples queden "atascados".
+## 3. Metodología numérica
 
-2. **Optimización Combinatoria (TSP Mexicano):**
-   Un viajero de negocios debe partir de su ciudad natal, recorrer las otras 31 capitales de México y volver a casa obteniendo el costo económico mínimo. ¿Cómo trazamos la ruta perfecta en un país tan extenso sin evaluar millones de años de combinaciones?
+Las funciones seleccionadas fueron:
 
----
+- **Rosenbrock:** \( f(\mathbf{x}) = \sum_{i=1}^{d-1} [100(x_{i+1}-x_i^2)^2 + (1-x_i)^2] \), con óptimo global en \( \mathbf{x}=(1,\dots,1) \) y valor 0.
+- **Schwefel:** \( f(\mathbf{x}) = 418.9829d - \sum_{i=1}^{d} x_i\sin(\sqrt{|x_i|}) \), con óptimo aproximado en \(x_i=420.9687\).
 
-## 3. Metodología
+Los experimentos se ejecutaron en `notebooks/Parte1_Optimizacion_Heuristica.ipynb`. La comparación incluye valor final de la función objetivo, número de evaluaciones y múltiples corridas independientes para observar robustez.
 
-Nuestra estrategia computacional sigue un enfoque progresivo:
+## 4. Resultados numéricos y visualizaciones
 
-- **Algoritmos Basados en Gradiente:** Utilizamos el Descenso por Gradiente (GD) apoyándonos en el cálculo simbólico mediante `SymPy` para obtener la dirección más pronunciada.
-- **Heurísticas y Bioinspiración:** Para lidiar con la complejidad (y los mínimos locales), implementamos Algoritmos Evolutivos (AE), Optimización por Enjambre de Partículas (PSO), Evolución Diferencial (DE) y Optimización por Colonias de Hormigas (ACO).
-- **Herramientas de Programación:** Base en `Python` empleando `NumPy` para operaciones vectorizadas rápidas, y `Matplotlib`/`ImageIO` para la visualización dinámica de la convergencia de las soluciones.
+La Figura 1 muestra las superficies 2D de Rosenbrock y Schwefel.
 
----
+![Figura 1. Superficies 2D de Rosenbrock y Schwefel.](resultados/superficies_2D.png)
 
-## 4. Experimentación y Resultados: Numérica Continua
+Las animaciones generadas para descenso por gradiente son:
 
-### 4.1 Evaluación Clásica (2D y 3D)
+- `resultados/gd_rosenbrock_2D.gif`
+- `resultados/gd_rosenbrock_3D.gif`
+- `resultados/gd_schwefel_2D.gif`
+- `resultados/gd_schwefel_3D.gif`
 
-Sometimos el GD, AE, PSO y DE a pruebas rigurosas. La **Tabla 1** resume el rendimiento obtenido en los escenarios bidimensionales clásicos. 
+Las animaciones generadas para métodos heurísticos son:
 
-**Tabla 1:** *Métricas de rendimiento de algoritmos en funciones de prueba 2D.*
+- `resultados/ae_rosenbrock_2D.gif`
+- `resultados/ae_schwefel_2D.gif`
+- `resultados/pso_rosenbrock_2D.gif`
+- `resultados/pso_rosenbrock_3D.gif`
+- `resultados/pso_schwefel_2D.gif`
+- `resultados/pso_schwefel_3D.gif`
 
-| Función | Método | Mejor Valor ($f_{min}$) | Evaluaciones |
-| :--- | :--- | :--- | :--- |
-| **Rosenbrock** | Gradiente | $< 10^{-6}$ | ~15,000 |
-| | PSO | 0.00 | 15,000 |
-| | DE | 0.00 | ~6,500 |
-| **Schwefel** | Gradiente | 258.12 (Atrapado) | ~10,000 |
-| | PSO | 0.00 | 15,000 |
-| | DE | 0.00 | ~8,000 |
+La Figura 2 resume la convergencia de los métodos heurísticos.
 
-Como se ilustra en la **Tabla 1**, el Descenso por Gradiente es extremadamente rápido y preciso cuando las condiciones son convexas o lisas (Rosenbrock). Sin embargo, al enfrentar Schwefel, queda completamente engañado por el primer mínimo local.
+![Figura 2. Convergencia comparativa de métodos heurísticos.](resultados/convergencia_heuristica.png)
 
-### 4.2 Visualización Espacial
+La Figura 3 presenta el boxplot de múltiples corridas independientes.
 
-El comportamiento de estos agentes puede observarse vívidamente cuando proyectamos los datos en 3D. A continuación, el carrusel de imágenes muestra el abismo de comportamiento entre utilizar derivadas y utilizar inteligencia de enjambre:
+![Figura 3. Robustez estadística en múltiples corridas.](resultados/boxplot_multiples_corridas.png)
 
-````carousel
-![Figura 1: Convergencia del Gradiente Descendente (GD) en la función de Rosenbrock (3D). Nótese cómo la trayectoria fluye por el valle hacia el óptimo en un rastro continuo.](./resultados/gd_rosenbrock_3D.gif)
-<!-- slide -->
-![Figura 2: Comportamiento del Optimización por Enjambre de Partículas (PSO) en la función de Schwefel (3D). Las partículas exploran todo el panorama superando los trampas locales.](./resultados/pso_schwefel_3D.gif)
-````
+En Rosenbrock, el descenso por gradiente sirve como referencia local y puede aproximarse al óptimo, pero su avance es sensible al ajuste de tasa de aprendizaje. En Schwefel, el gradiente queda atrapado con facilidad en mínimos locales. DE y PSO presentan mejor robustez porque exploran varias regiones del espacio de búsqueda; DE fue el método más consistente en los escenarios comparados.
 
-### 4.3 Robustez a través de Múltiples Corridas
+## 5. Metodología combinatoria: TSP mexicano
 
-La optimización estocástica puede variar según la semilla aleatoria inicial. Para validarlo, realizamos 30 corridas independientes. 
+El TSP se implementó con dos métodos:
 
-![Figura 3: Gráfica de caja (Boxplot) de 30 corridas independientes midiendo la estabilidad de los algoritmos heurísticos.](./resultados/boxplot_multiples_corridas.png)
+- **Algoritmo genético:** población de rutas, selección por torneo, cruce OX, mutación por intercambio y elitismo.
+- **Colonia de hormigas:** construcción probabilística de rutas con feromonas, evaporación e intensificación.
 
-Como se describe en la **Figura 3**, observamos que la Evolución Diferencial (DE) y el Enjambre de Partículas (PSO) mantienen en todas las corridas una dispersión casi nula respecto al óptimo global, demostrando alta robustez estadística frente a las variaciones del espacio de convergencia.
+La distancia entre capitales se estimó con la fórmula de Haversine y un factor de corrección de 1.2 para aproximar desplazamiento por carretera. El costo por kilómetro se calculó como:
 
----
+\[
+c_{\text{total}} = c_{\text{combustible}} + c_{\text{peaje}} + c_{\text{tiempo}}
+\]
 
-## 5. Experimentación y Resultados: Vendedor Viajero Mexicano
+Con los parámetros actualizados y documentados en el código:
 
-Luego de dominar el relieve matemático continuo, pasamos a las rutas logísticas y a problemas discretos, intentando crear la ruta menos costosa para recorrer las capitales de México.
+- Combustible: se usó un consumo conservador de \(7\text{ L}/100\text{ km}\). Con el precio nacional de gasolina regular reportado por Profeco con información de CRE para noviembre de 2024, \(23.96\text{ MXN/L}\), el componente queda en \(1.677\text{ MXN/km}\).
+- Peajes: CAPUFE publica tarifas oficiales por plaza y tramo, no un único costo nacional por kilómetro. Por eso se conserva \(4.00\text{ MXN/km}\) como parámetro efectivo de escenario para representar uso de red de cuota dentro del modelo simplificado.
+- Tiempo del vendedor: se tomó como referencia la remuneración promedio mensual nacional de \(14,056\text{ MXN}\) reportada en la minimonografía de los Censos Económicos 2024 del INEGI. Al dividir entre 30 días y asumir \(800\text{ km/día}\), el componente de tiempo es \(0.586\text{ MXN/km}\).
+- Costo total aproximado: \(1.677 + 4.000 + 0.586 = 6.263\text{ MXN/km}\).
 
-### 5.1 Justificación Técnica del Costo
+Este ajuste refuerza la trazabilidad sin alterar la interpretación central de los resultados: el objetivo sigue siendo minimizar costo económico, y el factor dominante continúa siendo la combinación distancia-peaje.
 
-Nuestra función objetivo no minimiza la distancia, minimiza los **pesos mexicanos (MXN)**. Tomando decisiones realistas apoyadas por literatura:
+## 6. Resultados del TSP
 
-- **Vehículo y Combustible:** Suponemos un Nissan Versa, líder de mercado (INEGI, 2017), rindiendo 7 L / 100km. A un costo estimado de \$26 MXN por litro (CRE, 2023), da como resultado un estimado de **\$1.82 MXN / km**.
-- **Peajes y Caminos:** Con base en promedios del tabulador oficial (CAPUFE, 2023), agregamos **\$4.00 MXN / km**.
-- **Costo de Oportunidad (Salario):** Un salario general de \$10,000 MXN / mes (Secretaría del Trabajo, 2023), equivale a \$333 MXN / día. Suponiendo una capacidad de conducir 800 km / día, nos refleja un factor de **\$0.42 MXN / km**.
+La Figura 4 muestra la ruta final obtenida con el algoritmo genético.
 
-Este modelo de costos agrega un alto realismo al problema TSP.
+![Figura 4. Ruta final del algoritmo genético sobre México.](resultados/ruta_ag_mexico.png)
 
-### 5.2 Evolución de la Heurística: Hormigas vs. Genética
+La Figura 5 muestra la ruta final obtenida con colonia de hormigas.
 
-Modelamos la solución desde dos trincheras: el Rastro de Feromonas (ACO) y la Supervivencia del más apto (Generación). 
+![Figura 5. Ruta final de colonia de hormigas sobre México.](resultados/ruta_vendedor_mexicano.png)
 
-![Figura 4: Curva comparativa de convergencia del Algoritmo Genético frente al método de Colonia de Hormigas (ACO) minimizando el costo total en MXN.](./resultados/convergencia_ag_vs_aco.png)
+Las animaciones geográficas están en:
 
-Tal y como se observa en la **Figura 4**, el Algoritmo Genético encuentra un régimen de alto descenso inicial y estabiliza a un costo inferior de forma constante en contraste con las colonias de hormigas que rápidamente estancan sin alcanzar un valle profundo.
+- `resultados/gif_ruta_ag.gif`
+- `resultados/gif_ruta_aco.gif`
 
-### 5.3 Animación de las Rutas Óptimas
+La Figura 6 compara la convergencia de AG y ACO.
 
-A continuación, exponemos la animación iteración por iteración de cómo los algoritmos van encontrando el arreglo perfecto en el mapa nacional:
+![Figura 6. Convergencia AG vs. ACO.](resultados/convergencia_ag_vs_aco.png)
 
-````carousel
-![Figura 5: Animación del Algoritmo Genético (AG). El cableado cruza gradualmente menos, logrando desenredarse de forma magistral hasta crear el circulo óptimo.](./resultados/gif_ruta_ag.gif)
-<!-- slide -->
-![Figura 6: Evolución dinámica generada por el optimizador por Colonias de Hormigas (ACO) sobre el mapa de las 32 capitales de México.](./resultados/gif_ruta_aco.gif)
-````
+El algoritmo genético mantuvo diversidad durante más generaciones y alcanzó una ruta de menor costo en las corridas documentadas. ACO mejoró rápidamente al inicio, pero tendió a estancarse cuando la feromona se concentró en una solución subóptima.
 
-Como evidencian las **Figuras 5 y 6**, las mejoras de la ruta iteración con iteración demuestran el intenso proceso de aprendizaje biológico. La ruta encontrada por el algoritmo genético es técnicamente válida y asombrosamente de bajo costo, bajando consistentemente y "desenredando" visualmente la red hasta quedar un círculo casi perfecto a lo largo de las fronteras de nuestro país.
+## 7. Discusión general
 
----
+El descenso por gradiente aportó interpretabilidad y precisión local. Su trayectoria muestra cómo la pendiente guía la solución, pero también evidencia su fragilidad frente a mínimos locales.
 
-## 6. Discusión
+Los métodos heurísticos aportaron exploración, diversidad y robustez. En la Parte 1 permitieron encontrar mejores soluciones en Schwefel; en la Parte 2 hicieron viable el TSP sin enumerar las \(32!\) rutas posibles.
 
-Si entrelazamos estos descubrimientos, nos percatamos que la naturaleza posee herramientas matemáticas muy valiosas:
-1. Al contrastar iterativamente los resultados en escenarios espaciales, como lo revelado en las **Figuras 1 y 2**, notamos que un Gradiente Descendiente requiere condiciones inmaculadas para funcionar, sufriendo "miopía matemática". Las heurísticas, por otro lado, sacrifican elegancia simbólica por pragmatismo computacional.
-2. La robustez demostrada en el Boxplot de la **Figura 3** nos da la tranquilidad de que tácticas como la Evolución Diferencial no son golpes de suerte.
-3. Finalmente, como lo demuestran categóricamente las animaciones en el mapa de las **Figuras 5 y 6**, los algoritmos biológicos transforman el caos estructural en rutas altamente eficientes, permitiendo a empresas del mundo real ahorrar enormes montos operativos.
+La conclusión técnica es que el método debe elegirse según la topología del problema: el gradiente es adecuado para explotación local en superficies suaves; las heurísticas son preferibles cuando el paisaje es multimodal, discreto o combinatoriamente grande.
 
----
+## 8. Uso de IA
 
-## 7. Conclusión
+La IA se usó como soporte de organización, planeación y revisión del trabajo, no como sustituto del desarrollo experimental. Su aporte principal fue ayudar a convertir la retroalimentación del profesor en un plan de acción verificable, revisar qué requisitos seguían faltando, ordenar los documentos del repositorio y mejorar la presentación del reporte técnico en formato blog.
 
-A través de rigurosos ejercicios que comprendieron simulaciones de funciones numéricas complejas y la optimización de gastos de viáticos a nivel nacional (TSP), hemos demostrado empíricamente el valor incomparable de la Optimización Computacional Heurística. 
-Los métodos estocásticos, a pesar de sus pesados requerimientos de evaluaciones poblacionales, compensan con creces garantizando su escape de trampas locales y encontrando rumbos creativos (y validables) ante problemas masivos.
+También se utilizó para proponer una estructura más clara del HTML, mejorar la rotulación de figuras y tablas, revisar la coherencia entre código, resultados y discusión, y sugerir cómo documentar el modelo de costos con fuentes para combustible, peajes y salario. En la etapa final ayudó a hacer una auditoría del repositorio: README, checklist de mejoras, verificación de entrega, bibliografía y trazabilidad de archivos generados.
 
----
+Los prompts principales fueron:
 
-## 8. Bibliografía
+- "Verifica este proyecto contra la retroalimentación del profesor y dime qué falta para cumplir todos los requisitos".
+- "Ayúdame a crear un plan de acción para mejorar la entrega y organizar los documentos del repositorio".
+- "Revisa si el reporte evidencia 2D y 3D, múltiples corridas, GIFs, modelo de costos y bibliografía APA".
+- "Ayúdame a mejorar el diseño del reporte HTML/blog y la presentación de figuras, tablas y resultados".
+- "Propón una explicación clara del modelo de costos para el TSP mexicano con combustible, peajes y salario".
+- "Ayúdame a dejar el README y la estructura del repositorio más presentables para GitHub".
 
-- Caminos y Puentes Federales de Ingresos y Servicios Conexos (CAPUFE). (2023). *Tarifas vigentes de la red carretera*. Gobierno de México. Extraído de https://www.gob.mx/capufe
-- Comisión Reguladora de Energía (CRE). (2023). *Precios promedios nacionales de combustibles*. Datos Abiertos del Gobierno de México.
-- Dorigo, M., & Gambardella, L. M. (1997). Ant colony system: A cooperative learning approach to the traveling salesman problem. *IEEE Transactions on Evolutionary Computation*, 1(1), 53-66.
-- Goldberg, D. E. (1989). *Genetic Algorithms in Search, Optimization, and Machine Learning*. Addison-Wesley Professional.
-- Instituto Nacional de Estadística y Geografía (INEGI). (2017). *Registro Administrativo de la Industria Automotriz de Vehículos Ligeros*.
-- Kennedy, J., & Eberhart, R. (1995). Particule swarm optimization. *Proceedings of ICNN'95 - International Conference on Neural Networks*, 1942-1948.
-- Secretaría del Trabajo y Previsión Social (STPS). (2023). *Estadísticas de la fuerza laboral y salarios promedios*. Gobierno de México.
-- Storn, R., & Price, K. (1997). Differential evolution – A simple and efficient heuristic for global optimization over continuous spaces. *Journal of Global Optimization*, 11(4), 341-359.
+Impacto: la IA ayudó principalmente a planificar cambios, encontrar vacíos frente a la rúbrica, mejorar la estructura narrativa y visual del reporte, y ordenar la entrega final. Las implementaciones, resultados y archivos generados se mantienen trazables en el notebook, scripts y carpeta `resultados/`.
 
----
+## 9. Contribución individual
 
-## 9. Declaración de Contribuciones
+- **Juan José Zapata Moreno:** contribuí a la parametrización de los experimentos de la Parte 1, al bloque del algoritmo evolutivo y a la generación de visualizaciones GIF.
+- **Cyriac SALIGNAT:** contribuí al planteamiento de las funciones, al modelado del costo del TSP y a la implementación de colonia de hormigas.
 
-El conjunto de los trabajos presentados en este informe ha sido realizado íntegramente por **Cyriac SALIGNAT** y **Juan José Zapata Moreno**. La distribución es la siguiente:
+**Video de contribución individual:** entregado por separado.
 
-- **Juan José Zapata Moreno:** Realizó la parametrización de las preguntas 3 y 4 de la parte 1, así como el bloque robusto del algoritmo evolutivo y la generación de ricas animaciones visuales (como los GIFs).
-- **Cyriac SALIGNAT:** Concluyó las preguntas de iniciación 1 y 2, formó el marco del costo y la teoría en la parte combinatoria (Parte 2), y programó con excelencia la técnica de Colonia de Hormigas.
+## 10. Bibliografía
 
-**Uso de IA:** Se recurrió de forma productiva a la asistencia de LLMs para el refino estético, depuración de anomalías sintácticas y redacción de estilo-blog para una divulgación más atractiva.
+Caminos y Puentes Federales de Ingresos y Servicios Conexos. (2024). *Tarifas vigentes 2024 de la red FONADIN y red operada por CAPUFE*. Gobierno de México. https://pot.capufe.mx/gobmx/Transparencia/Doc/TransparenciaF/Tarifas/Vigentes/2024/Tarifas-Vigentes-2024.pdf
 
-🔗 **Enlace a GitHub:** [Repositorio Oficial Heurísticas](https://github.com/Cyriac20/Trabajo-01-Optimizacion-heuristica)
+Dorigo, M., & Gambardella, L. M. (1997). Ant colony system: A cooperative learning approach to the traveling salesman problem. *IEEE Transactions on Evolutionary Computation, 1*(1), 53-66.
+
+Goldberg, D. E. (1989). *Genetic algorithms in search, optimization, and machine learning*. Addison-Wesley.
+
+Kennedy, J., & Eberhart, R. (1995). Particle swarm optimization. *Proceedings of ICNN'95 - International Conference on Neural Networks*, 1942-1948.
+
+Instituto Nacional de Estadística y Geografía. (2024). *Censos Económicos 2024: Minimonografía nacional*. INEGI. https://www.inegi.org.mx/contenidos/programas/ce/2024/doc/ce2024_mn00.pdf
+
+Procuraduría Federal del Consumidor. (2024). *Quién es quién en los precios de la gasolina: precios promedio diarios de gasolina regular, premium y diésel*. Gobierno de México. https://combustibles.profeco.gob.mx/qqpgasolina/2024/QQPGASOLINA_120224.pdf
+
+Rosenbrock, H. H. (1960). An automatic method for finding the greatest or least value of a function. *The Computer Journal, 3*(3), 175-184.
+
+Schwefel, H.-P. (1981). *Numerical optimization of computer models*. John Wiley & Sons.
+
+Sinnott, R. W. (1984). Virtues of the Haversine. *Sky and Telescope, 68*(2), 158.
+
+Storn, R., & Price, K. (1997). Differential evolution: A simple and efficient heuristic for global optimization over continuous spaces. *Journal of Global Optimization, 11*(4), 341-359.

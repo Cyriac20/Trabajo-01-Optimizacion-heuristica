@@ -1,20 +1,21 @@
-# Discusión: Descenso por Gradiente vs. Métodos Heurísticos
+# Discusión: descenso por gradiente vs. métodos heurísticos
 
-Para esta primera parte de optimización numérica, seleccionamos las funciones de **Rosenbrock** y **Schwefel**, probándolas en 2 y 3 dimensiones.
+Para la optimización numérica se seleccionaron las funciones de Rosenbrock y Schwefel, evaluadas en dos y tres dimensiones. La primera exige precisión local dentro de un valle estrecho y curvo; la segunda exige exploración global porque contiene múltiples mínimos locales.
 
-Al comparar el método de **descenso por gradiente** (con condición inicial aleatoria) con los métodos heurísticos o metaheurísticos (**Algoritmos Genéticos**, **Optimización por Enjambre de Partículas - PSO** y **Evolución Diferencial - DE**), pudimos notar varias diferencias en lo que aporta cada uno.
+## Aporte del descenso por gradiente
 
-### ¿Qué aportó el método de descenso por gradiente?
-El descenso por gradiente es muy bueno haciendo "sintonía fina" (explotación). Cuando logra caer en la cuenca del óptimo global (como nos pasó un par de veces con Rosenbrock), el valor final de la función objetivo suele ser bastante bueno. Sin embargo, su mayor problema es que es sumamente sensible al punto inicial. 
-Por ejemplo, con la función de Schwefel (que tiene muchísimos mínimos locales), el descenso por gradiente se quedó atascado rápidamente en mínimos locales alejados del óptimo global, dándonos valores finales de la función muy altos (pobres).
-En cuanto a las evaluaciones, el número de evaluaciones varió muchísimo. A veces convergía rápido en pocos pasos si el punto inicial ayudaba, pero si el paso o la tasa de aprendizaje requerían muchos ajustes finos, la cantidad de evaluaciones se disparaba, llegando en algunos casos a miles de iteraciones sin lograr el óptimo global.
+El descenso por gradiente aportó una referencia determinista y fácil de interpretar. Su trayectoria permite ver, paso a paso, cómo se explota la información local de la pendiente. En Rosenbrock puede acercarse al óptimo cuando la tasa de aprendizaje y la condición inicial son favorables, aunque suele avanzar lentamente por el valle curvo.
 
-### ¿Qué aportaron los métodos heurísticos?
-Los métodos heurísticos (GA, PSO, DE) aportaron una gran capacidad de **exploración global**. Al no depender de derivadas ni de un solo punto inicial (sino de toda una población), lograron evadir los mínimos locales mucho mejor que el gradiente.
-- En la función de **Schwefel**, que está llena de "trampas" (mínimos locales), los métodos heurísticos brillaron. PSO y Evolución Diferencial (DE) lograron acercarse al mínimo global (o llegar a él) con mucha consistencia.
-- El número de evaluaciones con los métodos heurísticos es generalmente fijo por iteración (tamaño de la población $\times$ número de iteraciones). En nuestras pruebas corrimos con 30 individuos y 50 iteraciones, logrando unas 1500 evaluaciones fijas. Aunque a veces esto es más alto que una corrida rápida de gradiente, la calidad de la solución (el valor final de la función objetivo) fue muchísimo mejor y más confiable para funciones complejas como la de Schwefel.
+Su limitación aparece con fuerza en Schwefel: al depender de información local, queda atrapado en mínimos locales y no cuenta con un mecanismo natural de escape. En términos de evaluaciones, puede ser competitivo cuando converge pronto, pero en paisajes multimodales muchas evaluaciones no garantizan mejor calidad final.
 
-### Conclusión general
-El **descenso por gradiente aporta precisión local** rápida si ya estamos cerca de la solución, pero es ciego a nivel global. Los **métodos heurísticos aportan robustez y visión global**, permitiendo encontrar el vecindario del óptimo verdadero en problemas complejos (como Schwefel) a costa de un mayor y más constante número de evaluaciones de la función objetivo.
+## Aporte de los métodos heurísticos
 
-A continuación, puedes consultar los GIFs animados en el repositorio que muestran cómo el gradiente a veces sigue un solo camino local, mientras que heurísticas como PSO mandan "exploradores" por todo el espacio de búsqueda.
+Los métodos heurísticos aportaron exploración global. AE, PSO y DE trabajan con poblaciones de soluciones, por lo que no dependen de una única condición inicial. Esto les permite cubrir regiones distintas del dominio, comparar candidatos y escapar con mayor frecuencia de mínimos locales.
+
+En Schwefel, DE y PSO fueron los métodos más robustos: alcanzaron valores finales cercanos al óptimo global con menor variabilidad entre corridas. En Rosenbrock, DE también destacó porque combina exploración poblacional con pasos diferenciales que se comportan como una aproximación adaptativa de dirección de mejora.
+
+## Lectura comparativa
+
+El descenso por gradiente es valioso como método de explotación local: muestra la geometría del problema, usa pocas ideas algorítmicas y puede ser eficiente cerca del óptimo. Los heurísticos son más costosos en número de evaluaciones porque cada iteración evalúa una población, pero compensan ese costo con robustez frente a condiciones iniciales desfavorables y paisajes multimodales.
+
+La conclusión principal es que no hay un único algoritmo superior. La topología del problema decide: para superficies suaves y bien condicionadas, el gradiente es una herramienta precisa; para superficies rugosas, multimodales o combinatorias, las heurísticas aportan diversidad, exploración y estabilidad estadística.

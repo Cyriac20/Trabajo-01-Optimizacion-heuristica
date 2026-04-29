@@ -3,3 +3,5 @@ matplotlib
 scipy
 imageio
 sympy
+markdown
+jupyter

@@ -2,10 +2,10 @@
 Algoritmo Genético para el Problema del Vendedor Viajero Mexicano.
 
 Mismos parámetros de costo que en vendedor_mexicano.py:
-  - Vendedor con Nissan Versa (México, 2017)
-  - Salario: 10 000 MXN/mes  →  333 MXN/día
-  - Peaje:    4 MXN/km
-  - Gasolina: 7 L/100km  ×  26 MXN/L  =  1.82 MXN/km
+  - Vendedor con Nissan Versa
+  - Salario: 14,056 MXN/mes -> 468.53 MXN/dia (INEGI, Censos Economicos 2024)
+  - Peaje: 4.00 MXN/km como parametro efectivo basado en tarifas CAPUFE por tramo
+  - Gasolina: 7 L/100km x 23.96 MXN/L = 1.677 MXN/km (Profeco/CRE, nov. 2024)
   - Velocidad media: 800 km/día
   - Factor de corrección de ruta: ×1.2 (fórmula de Haversine)
 
@@ -90,10 +90,10 @@ def distancia(ciudad_1, ciudad_2):
 
 
 def precio_viaje(ciudad_1, ciudad_2):
-    precio_gasolina    = 7 * 26 / 100   # MXN/km  (7 L/100km × 26 MXN/L)
-    precio_peaje       = 4               # MXN/km
+    precio_gasolina    = 7 * 23.96 / 100  # MXN/km
+    precio_peaje       = 4.00             # MXN/km
     kilometros_al_dia  = 800             # km/día
-    salario_diario     = 333             # MXN/día
+    salario_diario     = 14056 / 30      # MXN/día
 
     d = distancia(ciudad_1, ciudad_2)
     gasolina        = d * precio_gasolina

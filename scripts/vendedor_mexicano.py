@@ -1,14 +1,16 @@
 """
-El salario medio en Mexico es de 10 000 MXN al mes.
-El caro mas vendido en Mexico en 2017 era la Nissan Versa.
+Modelo de costos para el TSP mexicano.
 
-
-Entonces supondremos que el vendedor tiene un Nissan Versa para moverse y que el vendedor gana 10 000MXN al mes (333 MXN al dia)
-
-El peaje costa 4 MXN al km
-El caro consume 7L al 100km y el precio al litro de la gasolina 26MXN litro
-
-Supongamos que podemos hacer 800km al dia
+Supuestos documentados:
+- Vehiculo: Nissan Versa.
+- Consumo conservador: 7 L / 100 km, para reflejar ruta mixta y variacion real.
+- Gasolina regular: 23.96 MXN/L, referencia Profeco/CRE para noviembre de 2024.
+- Peajes: 4.00 MXN/km como parametro efectivo de escenario. CAPUFE publica
+  tarifas por plaza/tramo; este valor aproxima el costo medio por km de usar
+  red de cuota en el modelo simplificado.
+- Salario: 14,056 MXN/mes, aproximado con la minimonografia nacional de los
+  Censos Economicos 2024 de INEGI para remuneracion promedio mensual.
+- Jornada de ruta: 800 km/dia.
 """
 import numpy as np
 from AntColonyOptimizer import AntColonyOptimizer
@@ -83,10 +85,10 @@ def distancia(ciudad_1, ciudad_2):
 
 def precio_viaje(ciudad_1 , ciudad_2 ):
 
-    precio_gasolina = 7*26/100  # MXN / km
-    precio_peaje = 4    # MXN / km
-    kilometros_al_dia = 800     #km
-    salario_diario = 333    # MXN
+    precio_gasolina = 7 * 23.96 / 100  # MXN/km
+    precio_peaje = 4.00                # MXN/km
+    kilometros_al_dia = 800            # km
+    salario_diario = 14056 / 30        # MXN/dia
 
     d = distancia(ciudad_1, ciudad_2) 
     gasolina = d * precio_gasolina
