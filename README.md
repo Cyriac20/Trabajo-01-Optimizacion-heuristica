@@ -2,7 +2,7 @@
   <h1>🧭 Optimización Heurística — Trabajo 01</h1>
   <p><em>Descenso por gradiente, metaheurísticas y TSP sobre las capitales de México</em></p>
 
-  <a href="PENDIENTE_PEGAR_LINK_DEL_BLOG">
+<a href="https://cyriac20.github.io/Trabajo-01-Optimizacion-heuristica/reporte-tecnico-blog.html">
     <img src="https://img.shields.io/badge/Reporte_Técnico-Blog-0F172A?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Reporte Técnico"/>
   </a>
   <a href="https://github.com/Cyriac20/Trabajo-01-Optimizacion-heuristica">
@@ -13,7 +13,7 @@
 
 <br>
 
-Proyecto desarrollado para el curso de **Analítica Descriptiva**, enfocado en comparar métodos de optimización numérica y combinatoria. En la primera parte se optimizan funciones benchmark en 2D y 3D; en la segunda se resuelve una variante del Problema del Vendedor Viajero con las 32 capitales de los estados de México.
+Proyecto desarrollado para el curso de **Redes Neuronales y Algoritmos Bioinspirados**, enfocado en comparar métodos de optimización numérica y combinatoria. En la primera parte se optimizan funciones benchmark en 2D y 3D; en la segunda se resuelve una variante del Problema del Vendedor Viajero con las 32 capitales de los estados de México.
 
 ## 🎯 Objetivo
 
@@ -141,7 +141,8 @@ python genetico_vendedor.py
 |   `-- boxplot_multiples_corridas.png
 |
 |-- Reporte_Final_Blog.md
-|-- reporte-tecnico-blog.html
+|-- Reporte_Final_Blog.html
+|-- Reporte_Tecnico_v4_1.html
 |-- VERIFICACION_ENTREGA.md
 |-- PLAN_DE_ACCION_MEJORAS.md
 |-- requirements.txt
